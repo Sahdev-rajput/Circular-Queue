@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Queue
+{
+	int front;
+	int* arr;
+	int size;
+	int rear;
+}q;
+void create_queue()
+{
+	printf("Enter's queue size: ");
+	scanf_s("%d", &q.size);
+	q.front = q.rear = -1;
+	q.arr = (int*)malloc(sizeof(struct Queue));
+}
+void enqueue()
+{
+	if (q.rear == q.size && q.front == -1)
+	{
+		printf("No Space to Enqueue ");
+	}
+	else if ((q.rear+1)%q.size == q.front)
+	{
+		printf("Overflow");
+	}
+	else
+	{
+		int temp;
+		printf("Enter the element to enqueue: ");
+		scanf_s("%d", &temp);
+		q.rear = (q.rear + 1) % q.size;
+		q.arr[q.rear] = temp;
+	}
+}
+bool is_empty()
+{
+	return q.front == q.rear;
+}
+bool is_Full()
+{
+	return q.rear == q.size - 1;
+}
+void dequeue()
+{
+	if (q.front == q.rear)
+	{
+		printf("Underflow \n");
+	}
+	else
+	{
+		q.front++;
+	}
+}
+void display()
+{
+	if (is_empty())
+	{
+		printf("Queue is Empty \n");
+	}
+	else
+	{
+		int i = q.front + 1;
+		while (i != q.rear)
+		{
+			printf("%d ", q.arr[i]);
+			i = (i + 1) % q.size;
+		}
+		printf("%d \n", q.arr[i]);
+	}
+}
+int main()
+{
+	printf("                                                               CIRCULAR QUEUE\n");
+	create_queue();
+	int opt;
+	do
+	{
+		printf("\n \n \n");
+		printf("Choose one of the following option: \n\n\n");
+		printf("1. Enquueue \n");
+		printf("2. Dequeue \n");
+		printf("3. Display \n");
+		printf("4. Quit \n");
+		scanf_s("%d", &opt);
+		printf("\n");
+		if (opt != 4)
+		{
+			switch (opt)
+			{
+			case 1: enqueue();
+				break;
+			case 2:dequeue();
+				break;
+			case 3: display();
+				break;
+			}
+		}
+	} while (opt != 4);
+
+}
