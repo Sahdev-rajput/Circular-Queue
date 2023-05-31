@@ -1,4 +1,3 @@
-//This is the demonstration of circular queue
 
 #include <stdio.h>
 #include <stdlib.h>
